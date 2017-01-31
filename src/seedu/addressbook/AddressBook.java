@@ -486,11 +486,17 @@ public class AddressBook {
         final ArrayList<String[]> matchedPersons = new ArrayList<>();
         for (String[] person : getAllPersonsInAddressBook()) {
             final Set<String> wordsInName = new HashSet<>(splitByWhitespace(getNameFromPerson(person)));
-            if (!Collections.disjoint(wordsInName, keywords)) {
+            if (!Collections.disjoint(toLower(wordsInName), toLower(keywords))) {
                 matchedPersons.add(person);
             }
         }
         return matchedPersons;
+    }
+    private static ArrayList<String> toLower(Collection<String> words){
+		ArrayList<String> lowCaseWords=new ArrayList<String>();
+		for (String each:words)
+			lowCaseWords.add(each.toLowerCase());
+    	return lowCaseWords;
     }
 
     /**
